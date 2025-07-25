@@ -1,9 +1,11 @@
 from flask import Flask, jsonify
+from flask_cors import CORS  # Import CORS
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import os
 
 app = Flask(__name__)
+CORS(app)  # Enable CORS for all routes
 
 # Setup credentials
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]

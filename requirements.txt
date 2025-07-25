@@ -32,3 +32,5 @@ yarl==1.20.1
 flask
 gspread
 oauth2client
+gunicorn
+flask-cors
