@@ -29,3 +29,6 @@ rsa==4.9.1
 six==1.17.0
 urllib3==2.5.0
 yarl==1.20.1
+flask
+gspread
+oauth2client
