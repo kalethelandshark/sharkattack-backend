@@ -12,13 +12,20 @@ client = gspread.authorize(creds)
 
 @app.route('/api/get-code')
 def get_code():
-    sheet = client.open("Shark Codes").worksheet("Codes")
-    records = sheet.get_all_records()
+    try:
+        sheet = client.open("Shark Codes").worksheet("Codes")
+        records = sheet.get_all_records()
 
-    for i, row in enumerate(records):
-        if str(row["Used?"]).upper() != "TRUE":
-            code = row["Code"]
-            sheet.update_acell(f"B{i+2}", "TRUE")
-            return jsonify({"code": code})
+        for i, row in enumerate(records):
+            if str(row["Used?"]).upper() != "TRUE":
+                code = row["Code"]
+                sheet.update_acell(f"B{i+2}", "TRUE")
+                return jsonify({"code": code})
 
-    return jsonify({"code": "OUT-OF-CODES"})
+        return jsonify({"code": "OUT-OF-CODES"})
+    except Exception as e:
+        print("Error occurred:", e)  # Logs to Render console
+        return jsonify({"error": str(e)}), 500
+
+if __name__ == "__main__":
+    app.run(debug=True)
