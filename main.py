@@ -27,5 +27,9 @@ def get_code():
         print("Error occurred:", e)  # Logs to Render console
         return jsonify({"error": str(e)}), 500
 
+@app.route('/api/health')
+def health_check():
+    return jsonify({"status": "ok"})
+
 if __name__ == "__main__":
     app.run(debug=True)
